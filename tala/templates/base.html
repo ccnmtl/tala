@@ -64,29 +64,6 @@
         </a>
       </h4>
     </header>
-
-{% block primarynav %}
-    <div class="navbar" id="primarynav">
-      <div class="navbar-inner">
-        <div class="container">
-          <ul class="nav">
-          {% block primarynavtabs %}
-            <li class="active"><a href="/one/">One</a></li>
-						<li><a href="/two/">Two</a></li>
-          {% endblock %}
-					{% block primarynavtabsextra %}{% endblock %}
-          </ul>
-
-          <ul class="nav pull-right">
-            {% block primarynavrightextra %}{% endblock %}
-						<li><a href="/three/">Three</a></li>
-						<li><a href="/four/">Four</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-{% endblock %}
-
 {% endblock %}
 
     <div class="container-fluid" id="content">
@@ -103,11 +80,6 @@
   </div>
 </div>
 
-{% block footer %}
-  <footer class="footer navbar-fixed-bottom hidden-phone">
-    <img src="/site_media/img/logo_ccnmtl_sidebar.gif" class="printonly pull-right" />
-  </footer>
-{% endblock %}
 
 <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 
