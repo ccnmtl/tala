@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
+{% block js %}
+<script>
+// make some basics available to javascript
+window.room_id = {{room.id}};
+window.username = '{{request.user.username}}';
+window.fresh_token_url = '/room/{{room.id}}/fresh_token/';
+window.token = '{{token}}';
+</script>
+<script src="/site_media/js/irc.js"></script>
+{% endblock %}
+
 {% block content %}
 
 <h1>{{room.title}}</h1>
@@ -8,7 +19,7 @@
 {% for message in room.recent_messages %}
 <div class="row">
 	<div class="span1 timestamp">{{message.added|date:"H:i"}}</div>
-	<div class="span2 nick">{{message.user.username}}</div>
+	<div class="span2 nick">&lt;{{message.user.username}}&gt;</div>
 	<div class="span5 ircmessage">{{message.text}}</div>
 </div>
 {% endfor %}
@@ -16,7 +27,7 @@
 
 
 
-<form id="msg_form" class="form-inline post-form" action="post/" method="POST">
+<form id="msg_form" class="form-inline post-form">
 <input id="text-input" size="80" type="text" name="text" class="input-xxlarge">
 <input type="submit" class="btn" value="Post" />
 </form>

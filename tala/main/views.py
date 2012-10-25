@@ -1,14 +1,43 @@
 from annoying.decorators import render_to
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
-from simplejson import dumps
+
+from datetime import datetime
+import time
+from random import randint
+import hmac
+import hashlib
+from django.utils import simplejson
 from tala.main.models import User, Room, Message, get_or_create_room
 import zmq
 
 zmq_context = zmq.Context()
 BROKER_URL = "tcp://localhost:5555"
 ZMQ_APPNAME = "tala"
+
+
+SECRET = "6f1d916c-7761-4874-8d5b-8f8f93d20bf2"
+
+def gen_token(request, room_id):
+    username = request.user.username
+    sub_prefix = "%s.room_%d" % (ZMQ_APPNAME, room_id)
+    pub_prefix = sub_prefix + "." + username
+    now = int(time.mktime(datetime.now().timetuple()))
+    salt = randint(0,2**20)
+    ip_address = (request.META.get("HTTP_X_FORWARDED_FOR", "")
+                  or request.META.get("REMOTE_ADDR",""))
+
+    hmc = hmac.new(SECRET,
+                   '%s:%s:%s:%d:%d:%s' % (username, sub_prefix,
+                                          pub_prefix, now, salt,
+                                          ip_address),
+                   hashlib.sha1
+                   ).hexdigest()
+    return '%s:%s:%s:%d:%d:%s:%s' % (username, sub_prefix,
+                                     pub_prefix, now, salt,
+                                     ip_address, hmc)
+
 
 @login_required
 @render_to('main/index.html')
@@ -21,7 +50,15 @@ def index(request):
 @render_to('main/room.html')
 def room(request, room_id):
     room = get_object_or_404(Room, pk=room_id)
-    return dict(room=room)
+    return dict(room=room, token=gen_token(request, room.id))
+
+
+@login_required
+def fresh_token(request, room_id):
+    room = get_object_or_404(Room, pk=room_id)
+    return HttpResponse(
+        simplejson.dumps(dict(token=gen_token(request, room.id))),
+        mimetype="application/json")
 
 
 @login_required
@@ -39,10 +76,10 @@ def post_to_room(request, room_id):
                   message_text=m.text)
         # an envelope that contains that message serialized
         # and the address that we are publishing to
-        e = dict(address="%s.message.room_%d" % (ZMQ_APPNAME, room.id),
-                 content=dumps(md))
+        e = dict(address="%s.room_%d" % (ZMQ_APPNAME, room.id),
+                 content=simplejson.dumps(md))
         # send it off to the broker
-        socket.send(dumps(e))
+        socket.send(simplejson.dumps(e))
         # wait for a response from the broker to be sure it was sent
         socket.recv()
 
