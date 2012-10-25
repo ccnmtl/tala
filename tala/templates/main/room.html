@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block js %}
+<script>
+window.nick = '{{request.user.username}}';
+window.room_id = '{{room.id}}';
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+<h1>{{room.title}}</h1>
+
+<div id="log">
+
+</div>
+
+<form id="msg_form" class="form-inline post-form" action="post/" method="POST">
+<input id="appendedPrependedInput" size="80" type="text">
+<input type="submit" class="btn" value="Post" />
+</form>
+
+
+{% endblock %}
