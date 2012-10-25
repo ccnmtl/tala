@@ -21,6 +21,12 @@ class Room(models.Model):
     def get_absolute_url(self):
         return "/room/%d/" % self.id
 
+    def recent_messages(self):
+        """ just the most recent messages, chronological order """
+        messages = list(self.message_set.all().order_by("-added")[:10])
+        messages.reverse()
+        return messages
+
 
 class Message(models.Model):
     room = models.ForeignKey(Room)

@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 
-{% block js %}
-<script>
-window.nick = '{{request.user.username}}';
-window.room_id = '{{room.id}}';
-</script>
-
-{% endblock %}
-
 {% block content %}
 
 <h1>{{room.title}}</h1>
 
 <div id="log">
-
+{% for message in room.recent_messages %}
+<div class="row">
+	<div class="span1 timestamp">{{message.added|date:"H:i"}}</div>
+	<div class="span2 nick">{{message.user.username}}</div>
+	<div class="span5 ircmessage">{{message.text}}</div>
+</div>
+{% endfor %}
 </div>
 
+
+
 <form id="msg_form" class="form-inline post-form" action="post/" method="POST">
-<input id="appendedPrependedInput" size="80" type="text">
+<input id="text-input" size="80" type="text" name="text" class="input-xxlarge">
 <input type="submit" class="btn" value="Post" />
 </form>
 

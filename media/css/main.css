@@ -52,3 +52,15 @@ body > .container {
 #primarynav a:hover {
   color: blue;
 }
+
+.nick {
+                font-family: Courier;
+                font-weight: bold;
+}
+
+.ircmessage {
+                font-family: Courier;
+}
+.timestamp {
+                font-family: Courier;
+}
