@@ -1,13 +1,35 @@
 from django.db import models
 from django.contrib.auth.models import User, Group
 
+
+def get_or_create_room(group):
+    r = Room.objects.filter(group=group)
+    if r.count() > 0:
+        return r[0]
+    else:
+        return Room.objects.create(group=group, title=group.name)
+
+
 class Room(models.Model):
     group = models.ForeignKey(Group)
     title = models.CharField(max_length=256, default=u"unknown room")
     description = models.TextField(default=u"", blank=True)
+
+    def __unicode__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return "/room/%d/" % self.id
+
 
 class Message(models.Model):
     room = models.ForeignKey(Room)
     user = models.ForeignKey(User)
     text = models.TextField(default=u"", blank=True)
     added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['added', ]
+
+    def __unicode__(self):
+        return "[%s] %s: %s" % (self.added, self.user.username, self.text)
