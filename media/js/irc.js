@@ -61,6 +61,7 @@ $(function() {
         entry.append("<div class='span2 nick'>&lt;" + data.username + "&gt;</div>");
         entry.append("<div class='span5 ircmessage'>" + data.message_text + "</div>");
         appendLog(entry);
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub, entry]);
     };
 
     function appendLog(msg) {
