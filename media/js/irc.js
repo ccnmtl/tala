@@ -33,7 +33,7 @@ $(function() {
     };
 
     var connectSocket = function() {
-        conn = new WebSocket("ws://behemoth.ccnmtl.columbia.edu:5050/socket/?token=" + window.token);
+        conn = new WebSocket(window.websockets_base + "?token=" + window.token);
         conn.onclose = requestFailed;
         conn.onmessage = onMessage;
         conn.onopen = function (evt) {
@@ -44,9 +44,7 @@ $(function() {
 
     var onMessage = function (evt) {
         var envelope = JSON.parse(evt.data);
-        console.log(envelope);
         var data = JSON.parse(envelope.content);
-        console.log(data);
 
         var entry = $("<div/>");
         entry.addClass("row");
@@ -80,7 +78,8 @@ $(function() {
             type: 'POST',
             url: "post/",
             data: {'text': msg.val()},
-            success: function () {msg.val('');}
+            success: function () {msg.val('');},
+            error: function () { alert('post failed'); }
         });
         return false;
     });

@@ -1,4 +1,5 @@
 from annoying.decorators import render_to
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
@@ -13,23 +14,18 @@ from tala.main.models import Room, Message, get_or_create_room
 import zmq
 
 zmq_context = zmq.Context()
-BROKER_URL = "tcp://localhost:5555"
-ZMQ_APPNAME = "tala"
-
-
-SECRET = "6f1d916c-7761-4874-8d5b-8f8f93d20bf2"
 
 
 def gen_token(request, room_id):
     username = request.user.username
-    sub_prefix = "%s.room_%d" % (ZMQ_APPNAME, room_id)
+    sub_prefix = "%s.room_%d" % (settings.ZMQ_APPNAME, room_id)
     pub_prefix = sub_prefix + "." + username
     now = int(time.mktime(datetime.now().timetuple()))
     salt = randint(0, 2**20)
     ip_address = (request.META.get("HTTP_X_FORWARDED_FOR", "")
                   or request.META.get("REMOTE_ADDR", ""))
 
-    hmc = hmac.new(SECRET,
+    hmc = hmac.new(settings.WINDSOCK_SECRET,
                    '%s:%s:%s:%d:%d:%s' % (username, sub_prefix,
                                           pub_prefix, now, salt,
                                           ip_address),
@@ -51,7 +47,8 @@ def index(request):
 @render_to('main/room.html')
 def room(request, room_id):
     room = get_object_or_404(Room, pk=room_id)
-    return dict(room=room, token=gen_token(request, room.id))
+    return dict(room=room, token=gen_token(request, room.id),
+                websockets_base=settings.WINDSOCK_WEBSOCKETS_BASE)
 
 
 @login_required
@@ -70,14 +67,14 @@ def post_to_room(request, room_id):
         m = Message.objects.create(room=room, user=request.user, text=text)
         # publish it via the zmq broker
         socket = zmq_context.socket(zmq.REQ)
-        socket.connect(BROKER_URL)
+        socket.connect(settings.WINDSOCK_BROKER_URL)
         # the message we are broadcasting
         md = dict(room_id=room.id,
                   username=m.user.username,
                   message_text=m.text)
         # an envelope that contains that message serialized
         # and the address that we are publishing to
-        e = dict(address="%s.room_%d" % (ZMQ_APPNAME, room.id),
+        e = dict(address="%s.room_%d" % (settings.ZMQ_APPNAME, room.id),
                  content=simplejson.dumps(md))
         # send it off to the broker
         socket.send(simplejson.dumps(e))

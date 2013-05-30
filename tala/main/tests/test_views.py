@@ -35,8 +35,8 @@ class LoggedOutTest(unittest.TestCase):
 
 
 class LoggedInTest(unittest.TestCase):
-    """ make sure that we don't have access to anything
-    if we're not logged in """
+    """ Now that we're logged in, we should be able
+    to access our room, get a token, etc."""
 
     def setUp(self):
         self.c = Client()

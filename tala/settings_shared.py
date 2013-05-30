@@ -152,3 +152,8 @@ WIND_SUPERUSER_MAPPER_GROUPS = [
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 SESSION_COOKIE_HTTPONLY = True
+
+WINDSOCK_BROKER_URL = "tcp://selma.ccnmtl.columbia.edu:5555"
+ZMQ_APPNAME = "tala"
+WINDSOCK_SECRET = "6f1d916c-7761-4874-8d5b-8f8f93d20bf2"
+WINDSOCK_WEBSOCKETS_BASE = "ws://behemoth.ccnmtl.columbia.edu:5050/socket/"
