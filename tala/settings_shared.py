@@ -115,7 +115,7 @@ JENKINS_TASKS = (
     'django_jenkins.tasks.run_pyflakes',
 )
 
-PROJECT_APPS = ['tala.main',]
+PROJECT_APPS = ['tala.main', ]
 
 SOUTH_TESTS_MIGRATE = False
 
