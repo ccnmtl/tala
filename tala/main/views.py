@@ -9,7 +9,7 @@ from random import randint
 import hmac
 import hashlib
 from django.utils import simplejson
-from tala.main.models import User, Room, Message, get_or_create_room
+from tala.main.models import Room, Message, get_or_create_room
 import zmq
 
 zmq_context = zmq.Context()
@@ -19,14 +19,15 @@ ZMQ_APPNAME = "tala"
 
 SECRET = "6f1d916c-7761-4874-8d5b-8f8f93d20bf2"
 
+
 def gen_token(request, room_id):
     username = request.user.username
     sub_prefix = "%s.room_%d" % (ZMQ_APPNAME, room_id)
     pub_prefix = sub_prefix + "." + username
     now = int(time.mktime(datetime.now().timetuple()))
-    salt = randint(0,2**20)
+    salt = randint(0, 2**20)
     ip_address = (request.META.get("HTTP_X_FORWARDED_FOR", "")
-                  or request.META.get("REMOTE_ADDR",""))
+                  or request.META.get("REMOTE_ADDR", ""))
 
     hmc = hmac.new(SECRET,
                    '%s:%s:%s:%d:%d:%s' % (username, sub_prefix,
