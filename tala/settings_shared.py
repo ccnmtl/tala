@@ -157,3 +157,5 @@ WINDSOCK_BROKER_URL = "tcp://selma.ccnmtl.columbia.edu:5555"
 ZMQ_APPNAME = "tala"
 WINDSOCK_SECRET = "6f1d916c-7761-4874-8d5b-8f8f93d20bf2"
 WINDSOCK_WEBSOCKETS_BASE = "ws://behemoth.ccnmtl.columbia.edu:5050/socket/"
+ALLOWED_HOSTS = ['.ccnmtl.columbia.edu', 'localhost']
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
