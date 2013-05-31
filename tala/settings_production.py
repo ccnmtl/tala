@@ -6,6 +6,17 @@ TEMPLATE_DIRS = (
     "/var/www/tala/tala/tala/templates",
 )
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'tala',
+        'HOST': '',
+        'PORT': 6432,
+        'USER': '',
+        'PASSWORD': '',
+        }
+}
+
 MEDIA_ROOT = '/var/www/tala/uploads/'
 # put any static media here to override app served static media
 STATICMEDIA_MOUNTS = (
