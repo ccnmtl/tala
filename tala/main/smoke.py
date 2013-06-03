@@ -3,7 +3,6 @@ from models import Room
 import zmq
 from django.conf import settings
 from django.utils import simplejson
-import sys
 
 zmq_context = zmq.Context()
 
@@ -44,11 +43,11 @@ class BrokerConnectivity(SmokeTest):
             poller = zmq.Poller()
             poller.register(socket, zmq.POLLIN)
             if poller.poll(3*1000):  # 3s timeout in milliseconds
-                msg = socket.recv()
+                socket.recv()
             else:
                 raise IOError("Timeout connecting to broker")
             self.assertTrue(True)
-        except Exception, e:
+        except:
             self.assertTrue(False)
         finally:
             socket.close()
