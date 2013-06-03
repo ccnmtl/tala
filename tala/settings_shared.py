@@ -48,6 +48,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
+    'waffle.middleware.WaffleMiddleware',
 )
 
 ROOT_URLCONF = 'tala.urls'
@@ -76,6 +77,7 @@ INSTALLED_APPS = (
     'lettuce.django',
     'tala.main',
     'django_jenkins',
+    'waffle',
 )
 
 LETTUCE_APPS = (
