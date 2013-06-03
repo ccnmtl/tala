@@ -78,6 +78,7 @@ INSTALLED_APPS = (
     'tala.main',
     'django_jenkins',
     'waffle',
+    'smoketest',
 )
 
 LETTUCE_APPS = (
