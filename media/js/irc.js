@@ -71,7 +71,6 @@ $(function() {
         }
     }
 
-
     $("#msg_form").submit(function() {
         var msg = $("#text-input");
         $.ajax({
