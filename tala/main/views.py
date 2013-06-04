@@ -52,6 +52,13 @@ def room(request, room_id):
 
 
 @login_required
+@render_to('main/room_archive.html')
+def room_archive(request, room_id):
+    room = get_object_or_404(Room, pk=room_id)
+    return dict(room=room)
+
+
+@login_required
 def fresh_token(request, room_id):
     room = get_object_or_404(Room, pk=room_id)
     return HttpResponse(

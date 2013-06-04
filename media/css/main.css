@@ -64,3 +64,9 @@ body > .container {
 .timestamp {
                 font-family: Courier;
 }
+
+.date-row {
+  border-top: #06f solid 1px;
+  background-color: #def;
+	padding-bottom: 1em;
+}

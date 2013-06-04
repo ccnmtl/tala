@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block js %}
+<script type='text/javascript' src='/site_media/js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+{% endblock %}
+
+{% block content %}
+
+<h1>Archive: <a href="{{room.get_absolute_url}}">{{room.title}}</a></h1>
+
+<div id="log">
+{% for message in room.message_set.all %}
+{% ifchanged message.added.day %}
+<div class="row date-row">
+	<div class="timestamp">{{ message.added.date }}</div>
+</div>
+{% endifchanged %}
+<div class="row">
+	<div class="span1 timestamp">{{message.added|date:"H:i"}}</div>
+	<div class="span2 nick">&lt;{{message.user.username}}&gt;</div>
+	<div class="span5 ircmessage">{{message.text}}</div>
+</div>
+{% endfor %}
+</div>
+
+
+
+{% endblock %}

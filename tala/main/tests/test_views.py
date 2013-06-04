@@ -31,6 +31,10 @@ class LoggedOutTest(unittest.TestCase):
         response = self.c.get(self.room.get_absolute_url())
         self.assertEquals(response.status_code, 302)
 
+    def test_room_archive(self):
+        response = self.c.get(self.room.get_absolute_url() + "archive/")
+        self.assertEquals(response.status_code, 302)
+
     def test_fresh_token(self):
         response = self.c.get(self.room.get_absolute_url() + "fresh_token/")
         self.assertEquals(response.status_code, 302)
@@ -65,6 +69,10 @@ class LoggedInTest(unittest.TestCase):
 
     def test_room(self):
         response = self.c.get(self.room.get_absolute_url())
+        self.assertEquals(response.status_code, 200)
+
+    def test_room_archive(self):
+        response = self.c.get(self.room.get_absolute_url() + "archive/")
         self.assertEquals(response.status_code, 200)
 
     def test_fresh_token(self):
