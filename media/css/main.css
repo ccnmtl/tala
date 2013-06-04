@@ -65,8 +65,14 @@ body > .container {
                 font-family: Courier;
 }
 
-.date-row {
+.year-row {
   border-top: #06f solid 1px;
   background-color: #def;
 	padding-bottom: 1em;
+  font-size: 2em;
+	color: #999;
+}
+
+.month-row {
+  background-color: #eee;
 }

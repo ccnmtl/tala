@@ -27,6 +27,10 @@ class Room(models.Model):
         messages.reverse()
         return messages
 
+    def unique_dates(self):
+        """ list of dates that this room has messages from """
+        return self.message_set.dates('added', 'day')
+
 
 class Message(models.Model):
     room = models.ForeignKey(Room)

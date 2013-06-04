@@ -8,20 +8,17 @@
 
 <h1>Archive: <a href="{{room.get_absolute_url}}">{{room.title}}</a></h1>
 
-<div id="log">
-{% for message in room.message_set.all %}
-{% ifchanged message.added.day %}
-<div class="row date-row">
-	<div class="timestamp">{{ message.added.date }}</div>
-</div>
+
+{% for date in room.unique_dates %}
+{% ifchanged date.year %}
+<div class="row year-row pull-right">{{date.year}}</div>
+{% endifchanged %}
+{% ifchanged date.month %}
+<div class="row month-row">{{date|date:"M"}}</div>
 {% endifchanged %}
 <div class="row">
-	<div class="span1 timestamp">{{message.added|date:"H:i"}}</div>
-	<div class="span2 nick">&lt;{{message.user.username}}&gt;</div>
-	<div class="span5 ircmessage">{{message.text}}</div>
-</div>
+	<a href="{{date.year}}-{{date.month}}-{{date.day}}/">{{ date|date:"M d" }}</a></div>
 {% endfor %}
-</div>
 
 
 

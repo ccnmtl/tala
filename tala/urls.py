@@ -27,6 +27,8 @@ urlpatterns = patterns(
     (r'^$', 'tala.main.views.index'),
     (r'^room/(?P<room_id>\d+)/$', 'tala.main.views.room'),
     (r'^room/(?P<room_id>\d+)/archive/$', 'tala.main.views.room_archive'),
+    (r'^room/(?P<room_id>\d+)/archive/(?P<date>\d{4}\-\d+\-\d+)/$',
+     'tala.main.views.room_archive_date'),
     (r'^room/(?P<room_id>\d+)/post/$', 'tala.main.views.post_to_room'),
     (r'^room/(?P<room_id>\d+)/fresh_token/$', 'tala.main.views.fresh_token'),
     (r'^admin/', include(admin.site.urls)),

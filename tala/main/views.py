@@ -59,6 +59,20 @@ def room_archive(request, room_id):
 
 
 @login_required
+@render_to('main/room_archive_date.html')
+def room_archive_date(request, room_id, date):
+    room = get_object_or_404(Room, pk=room_id)
+    (year, month, day) = date.split('-')
+    # TODO: deal with invalid dates (Feb 30th, etc)
+    d = datetime(year=int(year), month=int(month), day=int(day))
+    messages = room.message_set.filter(
+        added__year=year,
+        added__month=month,
+        added__day=day)
+    return dict(room=room, messages=messages, date=d)
+
+
+@login_required
 def fresh_token(request, room_id):
     room = get_object_or_404(Room, pk=room_id)
     return HttpResponse(
