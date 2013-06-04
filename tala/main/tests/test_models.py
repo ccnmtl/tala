@@ -44,3 +44,7 @@ class MessageTest(unittest.TestCase):
     def test_unicode(self):
         self.assertTrue('test message' in str(self.message))
         self.assertTrue('testuser' in str(self.message))
+
+    def test_get_absolute_url(self):
+        self.assertTrue('/archive/' in self.message.get_absolute_url())
+        self.assertTrue('#message-' in self.message.get_absolute_url())

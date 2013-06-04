@@ -10,8 +10,8 @@
 
 <div id="log">
 {% for message in messages %}
-<div class="row">
-	<div class="span1 timestamp">{{message.added|date:"H:i"}}</div>
+<div class="row" id="message-{{message.id}}">
+	<div class="span1 timestamp"><a href="{{message.get_absolute_url}}">{{message.added|date:"H:i"}}</a></div>
 	<div class="span2 nick">&lt;{{message.user.username}}&gt;</div>
 	<div class="span5 ircmessage">{{message.text}}</div>
 </div>

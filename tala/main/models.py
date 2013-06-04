@@ -43,3 +43,12 @@ class Message(models.Model):
 
     def __unicode__(self):
         return "[%s] %s: %s" % (self.added, self.user.username, self.text)
+
+    def get_absolute_url(self):
+        return (
+            self.room.get_absolute_url()
+            + "archive/%04d-%02d-%02d/#message-%d" % (
+                self.added.year,
+                self.added.month,
+                self.added.day,
+                self.id))
