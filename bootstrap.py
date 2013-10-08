@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import glob
 import os
 import sys
 import subprocess
@@ -19,7 +18,16 @@ ret = subprocess.call(["python", "virtualenv.py",
                        vedir])
 if ret: exit(ret)
 
+ret = subprocess.call(
+    [os.path.join(vedir, 'bin', 'pip'), "install",
+     "--index-url=http://pypi.ccnmtl.columbia.edu/",
+     "wheel==0.21.0"])
+
+if ret:
+    exit(ret)
+
 ret = subprocess.call([os.path.join(vedir, 'bin', 'pip'), "install",
+                       "--use-wheel",
                        "--index-url=http://pypi.ccnmtl.columbia.edu/",
                        "--requirement",os.path.join(pwd,"requirements.txt")])
 if ret: exit(ret)
@@ -27,3 +35,5 @@ if ret: exit(ret)
 ret = subprocess.call(["python","virtualenv.py","--relocatable",vedir])
 # --relocatable always complains about activate.csh, which we don't really
 # care about. but it means we need to ignore its error messages
+
+
