@@ -28,19 +28,10 @@ COMPRESS_ROOT = "/var/www/tala/tala/media/"
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-SENTRY_SITE = 'tala-staging'
-SENTRY_SERVERS = ['http://sentry.ccnmtl.columbia.edu/sentry/store/']
 STATSD_PREFIX = 'tala-staging'
 
 if 'migrate' not in sys.argv:
-    import logging
-    from raven.contrib.django.handlers import SentryHandler
-    logger = logging.getLogger()
-    if SentryHandler not in map(type, logger.handlers):
-        logger.addHandler(SentryHandler())
-        logger = logging.getLogger('sentry.errors')
-        logger.propagate = False
-        logger.addHandler(logging.StreamHandler())
+    INSTALLED_APPS.append('raven.contrib.django.raven_compat')
 
 try:
     from local_settings import *
