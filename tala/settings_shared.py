@@ -74,17 +74,11 @@ INSTALLED_APPS = [
     'compressor',
     'django_statsd',
     'bootstrapform',
-    'lettuce.django',
     'tala.main',
     'django_jenkins',
     'waffle',
     'smoketest',
 ]
-
-LETTUCE_APPS = (
-    'tala.main',
-)
-
 
 STATSD_CLIENT = 'statsd.client'
 STATSD_PREFIX = 'tala'
