@@ -42,7 +42,7 @@ class BrokerConnectivity(SmokeTest):
 
             poller = zmq.Poller()
             poller.register(socket, zmq.POLLIN)
-            if poller.poll(3*1000):  # 3s timeout in milliseconds
+            if poller.poll(3 * 1000):  # 3s timeout in milliseconds
                 socket.recv()
             else:
                 raise IOError("Timeout connecting to broker")

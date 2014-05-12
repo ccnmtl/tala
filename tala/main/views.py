@@ -21,7 +21,7 @@ def gen_token(request, room_id):
     sub_prefix = "%s.room_%d" % (settings.ZMQ_APPNAME, room_id)
     pub_prefix = sub_prefix + "." + username
     now = int(time.mktime(datetime.now().timetuple()))
-    salt = randint(0, 2**20)
+    salt = randint(0, 2 ** 20)
     ip_address = (request.META.get("HTTP_X_FORWARDED_FOR", "")
                   or request.META.get("REMOTE_ADDR", ""))
 
