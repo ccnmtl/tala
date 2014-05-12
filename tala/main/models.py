@@ -29,7 +29,7 @@ class Room(models.Model):
 
     def unique_dates(self):
         """ list of dates that this room has messages from """
-        return self.message_set.dates('added', 'day')
+        return self.message_set.datetimes('added', 'day')
 
 
 class Message(models.Model):

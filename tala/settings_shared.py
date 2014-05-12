@@ -64,11 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.flatpages',
-    'django.contrib.markup',
-    'staticmedia',
     'django.contrib.admin',
-    'raven.contrib.django',
-    'munin',
     'south',
     'django_nose',
     'compressor',
@@ -78,13 +74,13 @@ INSTALLED_APPS = [
     'django_jenkins',
     'waffle',
     'smoketest',
+    'django_markwhat',
 ]
 
 STATSD_CLIENT = 'statsd.client'
 STATSD_PREFIX = 'tala'
 STATSD_HOST = '127.0.0.1'
 STATSD_PORT = 8125
-STATSD_PATCHES = ['django_statsd.patches.db', ]
 
 SENTRY_REMOTE_URL = 'http://sentry.ccnmtl.columbia.edu/sentry/store/'
 # remember to set the SENTRY_KEY in a local_settings.py
@@ -107,7 +103,6 @@ if 'test' in sys.argv or 'jenkins' in sys.argv:
 JENKINS_TASKS = (
     'django_jenkins.tasks.run_pylint',
     'django_jenkins.tasks.with_coverage',
-    'django_jenkins.tasks.django_tests',
     'django_jenkins.tasks.run_pep8',
     'django_jenkins.tasks.run_pyflakes',
 )
