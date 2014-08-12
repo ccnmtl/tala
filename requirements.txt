@@ -34,7 +34,7 @@ coverage==3.5.3
 pyzmq==13.1.0
 pytz==2013b
 
-djangowind==0.12.1
+djangowind==0.13.1
 django-indexer==0.2.1
 django-templatetag-sugar==0.1
 django-paging==0.2.2
