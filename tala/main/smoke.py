@@ -1,8 +1,8 @@
 from smoketest import SmokeTest
-from models import Room
+from .models import Room
 import zmq
 from django.conf import settings
-from django.utils import simplejson
+import json
 
 zmq_context = zmq.Context()
 
@@ -35,9 +35,9 @@ class BrokerConnectivity(SmokeTest):
             # an envelope that contains that message serialized
             # and the address that we are publishing to
             e = dict(address="%s.room_0" % (settings.ZMQ_APPNAME),
-                     content=simplejson.dumps(md))
+                     content=json.dumps(md))
             # send it off to the broker
-            socket.send(simplejson.dumps(e))
+            socket.send(json.dumps(e))
             # wait for a response from the broker to be sure it was sent
 
             poller = zmq.Poller()
