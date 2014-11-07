@@ -66,7 +66,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
     'django.contrib.admin',
-    'south',
     'django_nose',
     'compressor',
     'django_statsd',
@@ -107,8 +106,6 @@ JENKINS_TASKS = (
 )
 
 PROJECT_APPS = ['tala.main', ]
-
-SOUTH_TESTS_MIGRATE = False
 
 THUMBNAIL_SUBDIR = "thumbs"
 EMAIL_SUBJECT_PREFIX = "[tala] "
