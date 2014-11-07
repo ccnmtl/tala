@@ -9,7 +9,7 @@ import time
 from random import randint
 import hmac
 import hashlib
-from django.utils import simplejson
+import json
 from tala.main.models import Room, Message, get_or_create_room
 import zmq
 
@@ -76,8 +76,8 @@ def room_archive_date(request, room_id, date):
 def fresh_token(request, room_id):
     room = get_object_or_404(Room, pk=room_id)
     return HttpResponse(
-        simplejson.dumps(dict(token=gen_token(request, room.id))),
-        mimetype="application/json")
+        json.dumps(dict(token=gen_token(request, room.id))),
+        content_type="application/json")
 
 
 @login_required
@@ -96,9 +96,9 @@ def post_to_room(request, room_id):
         # an envelope that contains that message serialized
         # and the address that we are publishing to
         e = dict(address="%s.room_%d" % (settings.ZMQ_APPNAME, room.id),
-                 content=simplejson.dumps(md))
+                 content=json.dumps(md))
         # send it off to the broker
-        socket.send(simplejson.dumps(e))
+        socket.send(json.dumps(e))
         # wait for a response from the broker to be sure it was sent
         socket.recv()
 
