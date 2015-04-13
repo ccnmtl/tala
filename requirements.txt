@@ -29,6 +29,8 @@ coverage==3.7.1
 pyzmq==13.1.0
 pytz==2014.7
 six==1.9.0
+boto==2.36.0
+python-dateutil==2.4.0
 
 djangowind==0.13.2
 django-indexer==0.2.1
@@ -45,3 +47,5 @@ django-jenkins==0.16.3
 django-waffle==0.10.1
 django-smoketest==0.3.0
 django-markwhat==2014.9.20
+django-storages==1.1.8
+gunicorn==19.3.0
