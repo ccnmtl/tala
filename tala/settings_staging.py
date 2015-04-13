@@ -31,9 +31,9 @@ COMPRESS_ENABLED = True
 COMPRESS_OFFLINE = True
 COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_URL = STATIC_URL
-DEFAULT_FILE_STORAGE = 'tala.s3utils.MediaRootS3BotoStorage'
+DEFAULT_FILE_STORAGE = 'cacheds3storage.MediaRootS3BotoStorage'
 MEDIA_URL = S3_URL + '/media/'
-COMPRESS_STORAGE = 'tala.s3utils.CompressorS3BotoStorage'
+COMPRESS_STORAGE = 'cacheds3storage.CompressorS3BotoStorage'
 AWS_QUERYSTRING_AUTH = False
 
 STATSD_PREFIX = 'tala-staging'
