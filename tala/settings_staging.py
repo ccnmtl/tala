@@ -23,8 +23,7 @@ TEMPLATE_DEBUG = DEBUG
 
 AWS_STORAGE_BUCKET_NAME = "ccnmtl-tala-static-stage"
 AWS_PRELOAD_METADATA = True
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'tala.s3utils.CompressorS3BotoStorage'
+STATICFILES_STORAGE = 'cacheds3storage.CompressorS3BotoStorage'
 S3_URL = 'https://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 STATIC_URL = 'https://%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
 COMPRESS_ENABLED = True
