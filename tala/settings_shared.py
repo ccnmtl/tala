@@ -114,12 +114,20 @@ EMAIL_HOST = 'localhost'
 SERVER_EMAIL = "tala@ccnmtl.columbia.edu"
 DEFAULT_FROM_EMAIL = SERVER_EMAIL
 
-# put any static media here to override app served static media
 STATICMEDIA_MOUNTS = (
-    ('/sitemedia', 'sitemedia'),
+    ('/static', 'sitemedia'),
 )
 
-COMPRESS_URL = "/site_media/"
+STATIC_ROOT = "/tmp/tala/static"
+STATICFILES_DIRS = ("media/",)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_URL = "/media/"
 COMPRESS_ROOT = "media/"
 
 # WIND settings
