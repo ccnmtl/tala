@@ -68,7 +68,6 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'django.contrib.admin',
     'django.contrib.staticfiles',
-    'django_nose',
     'compressor',
     'django_statsd',
     'bootstrapform',
@@ -89,7 +88,7 @@ SENTRY_REMOTE_URL = 'http://sentry.ccnmtl.columbia.edu/sentry/store/'
 # as documented in the wiki
 SENTRY_SITE = 'tala'
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 if 'test' in sys.argv or 'jenkins' in sys.argv:
     DATABASES = {
         'default': {
