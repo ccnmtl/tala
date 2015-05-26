@@ -5,7 +5,7 @@ Markdown==2.6.1
 uuid==1.30
 psycopg2==2.5.4
 versiontools==1.9.1
-statsd==3.0.1
+statsd==3.1
 flake8==2.2.5
 pyparsing==2.0.3
 tornado==3.1.1
