@@ -17,7 +17,7 @@ ipython==3.0.0
 ipdb==0.8
 rdflib==4.2.1
 selenium==2.46.1
-logilab-common==0.59.0
+logilab-common==1.0.2
 logilab-astng==0.24.1
 pylint==1.4.1
 pep8==1.5.7
