@@ -19,7 +19,7 @@ rdflib==4.2.1
 selenium==2.46.1
 logilab-common==1.0.2
 logilab-astng==0.24.1
-pylint==1.4.1
+pylint==1.4.4
 pep8==1.5.7
 pyflakes==0.8.1
 mccabe==0.3.1
