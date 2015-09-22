@@ -22,8 +22,8 @@ def gen_token(request, room_id):
     pub_prefix = sub_prefix + "." + username
     now = int(time.mktime(datetime.now().timetuple()))
     salt = randint(0, 2 ** 20)
-    ip_address = (request.META.get("HTTP_X_FORWARDED_FOR", "")
-                  or request.META.get("REMOTE_ADDR", ""))
+    ip_address = (request.META.get("HTTP_X_FORWARDED_FOR", "") or
+                  request.META.get("REMOTE_ADDR", ""))
 
     hmc = hmac.new(settings.WINDSOCK_SECRET,
                    '%s:%s:%s:%d:%d:%s' % (username, sub_prefix,
