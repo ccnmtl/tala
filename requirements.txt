@@ -34,7 +34,7 @@ pyOpenSSL==0.15.1
 ndg-httpsclient==0.4.0
 sqlparse==0.1.16
 
-djangowind==0.13.3
+djangowind==0.14.1
 django-indexer==0.3.0
 django-paging==0.2.5
 django-annoying==0.8.3
