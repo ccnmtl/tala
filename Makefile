@@ -47,6 +47,16 @@ rebase:
 	make migrate
 	make flake8
 
+build:
+	docker build -t ccnmtl/tala .
+
+compose-migrate:
+	docker-compose run web python manage.py migrate --settings=tala.settings_compose
+
+compose-run:
+	docker-compose up
+
+
 # run this one the very first time you check
 # this out on a new machine to set up dev
 # database, etc. You probably *DON'T* want

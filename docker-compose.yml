@@ -1,0 +1,23 @@
+db:
+  image: postgres
+windsock-broker:
+  image: thraxil/windsock-broker
+windsock:
+  image: thraxil/windsock
+  ports:
+    - "5050:5050"
+  links:
+    - windsock-broker
+  volumes:
+    - /etc/nginx/ssl/ccnmtl-wildcard.key:/go/src/github.com/thraxil/windsock/key.pem
+    - /etc/nginx/ssl/ccnmtl-wildcard.pem:/go/src/github.com/thraxil/windsock/cert.pem
+web:
+  build: .
+  command: python manage.py runserver 0.0.0.0:8000 --settings=tala.settings_compose
+  volumes:
+    - .:/var/www/tala/tala
+  ports:
+    - "8000:8000"
+  links:
+    - db
+    - windsock-broker
