@@ -2,7 +2,7 @@ MANAGE=./manage.py
 APP=tala
 FLAKE8=./ve/bin/flake8
 
-jenkins: ./ve/bin/python validate test flake8
+jenkins: ./ve/bin/python validate flake8 jshint jscs test
 
 ./ve/bin/python: requirements.txt bootstrap.py virtualenv.py
 	./bootstrap.py
@@ -24,6 +24,18 @@ validate: ./ve/bin/python
 
 shell: ./ve/bin/python
 	$(MANAGE) shell_plus
+
+jshint: node_modules/jshint/bin/jshint
+	./node_modules/jshint/bin/jshint --config=.jshintrc media/js/irc.js
+
+jscs: node_modules/jscs/bin/jscs
+	./node_modules/jscs/bin/jscs media/js/irc.js
+
+node_modules/jshint/bin/jshint:
+	npm install jshint --prefix .
+
+node_modules/jscs/bin/jscs:
+	npm install jscs --prefix .
 
 clean:
 	rm -rf ve
