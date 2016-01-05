@@ -53,7 +53,7 @@ django-cacheds3storage==0.1.1
 gunicorn==19.3.0
 django-stagingcontext==0.1.0
 django-debug-toolbar==1.4
-django-impersonate==0.9.1
+django-impersonate==0.9.2
 django-ga-context==0.1.0
 
 ccnmtlsettings==0.1.0
