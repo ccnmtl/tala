@@ -1,5 +1,6 @@
 APP=tala
 JS_FILES=media/js/irc.js
+MAX_COMPLEXITY=4
 
 all: jenkins
 
