@@ -24,7 +24,7 @@ pylint==1.4.4
 pep8==1.6.2
 pyflakes==1.0.0
 mccabe==0.3.1
-coverage==3.7.1
+coverage==4.0.3
 pyzmq==14.6.0
 pytz==2015.7
 six==1.10.0
@@ -44,7 +44,7 @@ django-compressor==1.6
 django-statsd-mozilla==0.3.16
 raven==5.8.1
 django-bootstrap-form==3.2
-django-jenkins==0.17.0
+django-jenkins==0.18.1
 django-waffle==0.11
 django-smoketest==0.3.0
 django-markwhat==1.4
