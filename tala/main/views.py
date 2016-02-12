@@ -1,8 +1,7 @@
-from annoying.decorators import render_to
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 
 from datetime import datetime
 import time
@@ -37,29 +36,26 @@ def gen_token(request, room_id):
 
 
 @login_required
-@render_to('main/index.html')
 def index(request):
     rooms = [get_or_create_room(g) for g in request.user.groups.all()]
-    return dict(rooms=rooms)
+    return render(request, 'main/index.html', dict(rooms=rooms))
 
 
 @login_required
-@render_to('main/room.html')
 def room(request, room_id):
     room = get_object_or_404(Room, pk=room_id)
-    return dict(room=room, token=gen_token(request, room.id),
-                websockets_base=settings.WINDSOCK_WEBSOCKETS_BASE)
+    return render(request, 'main/room.html',
+                  dict(room=room, token=gen_token(request, room.id),
+                       websockets_base=settings.WINDSOCK_WEBSOCKETS_BASE))
 
 
 @login_required
-@render_to('main/room_archive.html')
 def room_archive(request, room_id):
     room = get_object_or_404(Room, pk=room_id)
-    return dict(room=room)
+    return render(request, 'main/room_archive.html', dict(room=room))
 
 
 @login_required
-@render_to('main/room_archive_date.html')
 def room_archive_date(request, room_id, date):
     room = get_object_or_404(Room, pk=room_id)
     (year, month, day) = date.split('-')
@@ -69,7 +65,8 @@ def room_archive_date(request, room_id, date):
         added__year=year,
         added__month=month,
         added__day=day)
-    return dict(room=room, messages=messages, date=d)
+    return render(request, 'main/room_archive_date.html',
+                  dict(room=room, messages=messages, date=d))
 
 
 @login_required
