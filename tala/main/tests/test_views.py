@@ -1,10 +1,10 @@
-from django.utils import unittest
+from django.test import TestCase
 from django.test.client import Client
 from django.contrib.auth.models import User, Group
 from tala.main.models import get_or_create_room
 
 
-class LoggedOutTest(unittest.TestCase):
+class LoggedOutTest(TestCase):
     """ make sure that we don't have access to anything
     if we're not logged in """
 
@@ -49,7 +49,7 @@ class LoggedOutTest(unittest.TestCase):
         self.assertEquals(response.status_code, 302)
 
 
-class LoggedInTest(unittest.TestCase):
+class LoggedInTest(TestCase):
     """ Now that we're logged in, we should be able
     to access our room, get a token, etc."""
 

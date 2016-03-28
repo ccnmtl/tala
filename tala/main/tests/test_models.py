@@ -1,9 +1,9 @@
-from django.utils import unittest
+from django.test import TestCase
 from django.contrib.auth.models import User, Group
 from tala.main.models import get_or_create_room, Message
 
 
-class BasicRoomTest(unittest.TestCase):
+class BasicRoomTest(TestCase):
     def setUp(self):
         self.group = Group.objects.create(name="testgroup")
         self.room = get_or_create_room(group=self.group)
@@ -25,7 +25,7 @@ class BasicRoomTest(unittest.TestCase):
             self.room.recent_messages(), [])
 
 
-class MessageTest(unittest.TestCase):
+class MessageTest(TestCase):
     def setUp(self):
         self.group = Group.objects.create(name="testgroup")
         self.room = get_or_create_room(group=self.group)
