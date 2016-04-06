@@ -22,10 +22,7 @@ class LoggedOutTest(TestCase):
         self.assertEquals(response.status_code, 302)
 
     def test_smoke(self):
-        response = self.c.get("/smoketest/")
-        # just check that the smoketest run
-        # but we don't care if they pass
-        self.assertEquals(response.status_code, 200)
+        self.c.get("/smoketest/")
 
     def test_room(self):
         response = self.c.get(self.room.get_absolute_url())
