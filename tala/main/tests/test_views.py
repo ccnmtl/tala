@@ -88,3 +88,8 @@ class LoggedInTest(TestCase):
     def test_fresh_token(self):
         response = self.c.get(self.room.get_absolute_url() + "fresh_token/")
         self.assertEquals(response.status_code, 200)
+
+    def test_post_to_room_no_message(self):
+        response = self.c.post(self.room.get_absolute_url() + "post/",
+                               {})
+        self.assertEquals(response.status_code, 302)
