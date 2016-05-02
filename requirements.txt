@@ -28,7 +28,7 @@ pyzmq==15.2.0
 pytz==2016.4
 six==1.10.0
 boto==2.38.0
-python-dateutil==2.5.2
+python-dateutil==2.5.3
 pyasn1==0.1.9
 pyOpenSSL==0.15.1
 ndg-httpsclient==0.4.0
