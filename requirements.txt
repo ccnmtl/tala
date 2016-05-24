@@ -23,7 +23,7 @@ pylint==1.5.5
 pep8==1.7.0
 pyflakes==1.2.3
 mccabe==0.4.0
-coverage==4.0.3
+coverage==4.1
 pyzmq==15.2.0
 pytz==2016.4
 six==1.10.0
