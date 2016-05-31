@@ -17,7 +17,7 @@ sure==1.2.25
 ipython==4.2.0
 ipdb==0.10.0
 rdflib==4.2.1
-logilab-common==1.2.0
+logilab-common==1.2.1
 logilab-astng==0.24.3
 pylint==1.5.5
 pep8==1.7.0
