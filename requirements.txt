@@ -7,7 +7,7 @@ psycopg2==2.6.1
 versiontools==1.9.1
 statsd==3.2.1
 pycodestyle==2.0.0
-flake8==2.6.0
+flake8==2.6.2
 pyparsing==2.1.5
 tornado==4.3
 BeautifulSoup==3.2.1
