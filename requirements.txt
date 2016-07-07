@@ -56,4 +56,4 @@ django-debug-toolbar==1.4
 django-impersonate==1.0.1
 django-ga-context==0.1.0
 
-ccnmtlsettings==0.2.0
+ccnmtlsettings==0.3.0
