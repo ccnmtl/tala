@@ -27,7 +27,7 @@ pep8==1.7.0
 pyflakes==1.2.3
 mccabe==0.5.2
 coverage==4.2
-pyzmq==15.3.0
+pyzmq==15.4.0
 pytz==2016.6.1
 six==1.10.0
 boto==2.42.0
