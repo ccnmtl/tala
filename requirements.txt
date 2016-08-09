@@ -9,7 +9,7 @@ statsd==3.2.1
 pycodestyle==2.0.0
 enum34==1.1.6
 configparser==3.5.0
-flake8==3.0.3
+flake8==3.0.4
 pyparsing==2.1.6
 tornado==4.4.1
 BeautifulSoup==3.2.1
@@ -27,7 +27,7 @@ pep8==1.7.0
 pyflakes==1.2.3
 mccabe==0.5.2
 coverage==4.2
-pyzmq==15.3.0
+pyzmq==15.4.0
 pytz==2016.6.1
 six==1.10.0
 boto==2.42.0
@@ -44,7 +44,7 @@ djangowind==0.15.0
 django-appconf==1.0.2
 django-compressor==2.0
 django-statsd-mozilla==0.3.16
-raven==5.24.2
+raven==5.24.3
 django-bootstrap-form==3.2.1
 django-jenkins==0.19.0
 django-waffle==0.11.1
