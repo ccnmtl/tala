@@ -1,23 +1,17 @@
-FROM ubuntu:trusty
-RUN apt-get update
-RUN apt-get install python-ldap libldap2-dev libsasl2-dev \
-    python-all-dev libxml2-dev libxslt1-dev libjpeg-dev \
-    python-tk liblcms1 libexif-dev libexif12 libfontconfig1-dev \
-    libfreetype6-dev liblcms1-dev libxft-dev python-imaging \
-    python-beautifulsoup python-dev libssl-dev gcc \
-    build-essential binutils libpq-dev postgresql-client -y
-ENV PYTHONUNBUFFERED 1
-RUN apt-get install nodejs npm python-setuptools -y
-RUN easy_install pip
-RUN pip install --upgrade virtualenv
-RUN ln -s /usr/bin/nodejs /usr/local/bin/node
-RUN apt-get install libzmq-dev -y
-RUN mkdir -p /var/www/tala/tala
-COPY requirements.txt /var/www/tala/tala/
-RUN pip install --no-deps -r /var/www/tala/tala/requirements.txt
-WORKDIR /var/www/tala/tala
-COPY . /var/www/tala/tala/
-RUN python manage.py test
+FROM ccnmtl/django.base
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+ADD wheelhouse /wheelhouse
+RUN /ve/bin/pip install --no-index -f /wheelhouse -r /wheelhouse/requirements.txt \
+    && rm -rf /wheelhouse && touch /ve/sentinal
+WORKDIR /app
+COPY . /app/
+RUN VE=/ve/ MANAGE="/ve/bin/python manage.py" make
 EXPOSE 8000
 ADD docker-run.sh /run.sh
-CMD ["/run.sh"]
+ENV APP tala
+ENTRYPOINT ["/run.sh"]
+CMD ["run"]
