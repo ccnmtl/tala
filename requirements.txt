@@ -30,7 +30,7 @@ coverage==4.2
 pyzmq==16.0.2
 pytz==2016.10
 six==1.10.0
-boto==2.44.0
+boto==2.45.0
 python-dateutil==2.6.0
 pyasn1==0.1.9
 pyOpenSSL==16.2.0
