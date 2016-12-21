@@ -2,7 +2,9 @@ from smoketest import SmokeTest
 from .models import Room
 import zmq
 from django.conf import settings
+from websocket import create_connection
 import json
+from .views import gen_token
 
 zmq_context = zmq.Context()
 
@@ -51,3 +53,27 @@ class BrokerConnectivity(SmokeTest):
             self.assertTrue(False)
         finally:
             socket.close()
+
+
+class DummyUser(object):
+    username = "test"
+
+
+class DummyRequest(object):
+    def __init__(self):
+        self.user = DummyUser()
+        self.META = {'HTTP_X_FORWARDED_FOR': '127.0.0.1'}
+
+
+class WindsockConnectivity(SmokeTest):
+    def test_connect(self):
+        try:
+            r = DummyRequest()
+            token = gen_token(r, 1)
+            ws = create_connection(
+                settings.WINDSOCK_WEBSOCKETS_BASE + "?token=" + token)
+            ws.close()
+            self.assertTrue(True)
+        except Exception, e:
+            print(e)
+            self.assertTrue(False)
