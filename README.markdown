@@ -1,3 +1,8 @@
+# NOTE
+
+This project is no longer maintained. Feel free to use it or look at
+it, but don't expect updates.
+
 # Tala
 
 Django demo app for simple chatting via
